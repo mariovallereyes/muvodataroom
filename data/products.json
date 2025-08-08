@@ -1,0 +1,39 @@
+{
+  "items": [
+    {
+      "id": "p1",
+      "name": "Gotas CBD 10ml Menta 1000mg",
+      "description": "240 gotas · 4.2 mg por gota",
+      "image": "/products/1.jpg",
+      "revenueByYear": { "2023": 520000, "2024": 610000, "2025": 290000 }
+    },
+    {
+      "id": "p2",
+      "name": "Gotas CBD 20ml Menta 2000mg",
+      "description": "480 gotas · 4.2 mg por gota",
+      "image": "/products/2.jpg",
+      "revenueByYear": { "2023": 690000, "2024": 740000, "2025": 350000 }
+    },
+    {
+      "id": "p3",
+      "name": "Bálsamo CBD",
+      "description": "Uso tópico",
+      "image": "/products/3.jpg",
+      "revenueByYear": { "2023": 310000, "2024": 330000, "2025": 150000 }
+    },
+    {
+      "id": "p4",
+      "name": "Gomitas CBD",
+      "description": "Surtidas",
+      "image": "/products/4.jpg",
+      "revenueByYear": { "2023": 270000, "2024": 300000, "2025": 140000 }
+    },
+    {
+      "id": "p5",
+      "name": "Capsulas CBD",
+      "description": "Formato diario",
+      "image": "/products/5.jpg",
+      "revenueByYear": { "2023": 220000, "2024": 250000, "2025": 120000 }
+    }
+  ]
+}

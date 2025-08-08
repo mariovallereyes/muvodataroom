@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base */
+:root {
+  --bg: #ffffff;
+  --fg: #1A1A1A;
+}
+.dark {
+  --bg: #0b0b0b;
+  --fg: #eaeaea;
+}
+html, body, #__next {
+  height: 100%;
+}
+body {
+  @apply bg-[var(--bg)] text-[var(--fg)] antialiased;
+  font-feature-settings: "cv02","cv03","cv04","cv11";
+}
+
+/* Cards */
+.card {
+  @apply rounded-2xl shadow-card bg-white dark:bg-zinc-900 p-6 transition-transform duration-200 hover:scale-[1.01];
+}
+
+/* Disable card hover scale within company page scope */
+.no-card-hover .card {
+  @apply transition-none hover:scale-100;
+}
+
+/* Utilities */
+.container-page {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}

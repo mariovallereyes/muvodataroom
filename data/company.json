@@ -1,0 +1,10 @@
+{
+    "name": "MUVO CBD",
+    "kpis": {
+      "repeatCustomersPct": {
+        "2023": 0.35,
+        "2024": 0.38,
+        "2025": 0.4
+      }
+    }
+  }
