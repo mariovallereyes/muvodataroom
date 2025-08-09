@@ -2,6 +2,6 @@ const sub = "/alteredventures/muvodataroom";
 /** @type {import('next').NextConfig} */
 module.exports = {
   basePath: sub,
-  // Let next/image handle basePath automatically
-  images: { unoptimized: false },
+  // Serve images as plain files so rewrites/proxy don't break _next/image
+  images: { unoptimized: true },
 };
