@@ -9,22 +9,10 @@ export default function YearSelector() {
   const { selectedYear, setSelectedYear, salesByYear } = useStore()
   const years = Object.keys(salesByYear)
   const pathname = usePathname()
-  // Normalize pathname: remove locale prefix and basePath so we can reliably detect /empresa
-  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || ""
-  const normalizePath = (p?: string) => {
-    if (!p) return ""
-    // Strip basePath only if it is the prefix
-    let out = basePath && p.startsWith(basePath) ? p.slice(basePath.length) : p
-    // Strip locale prefix (/es or /en)
-    out = out.replace(/^\/(es|en)(?=\/|$)/, "")
-    // Ensure leading slash
-    if (!out.startsWith("/")) out = "/" + out
-    // Remove trailing slash except root
-    if (out.length > 1 && out.endsWith("/")) out = out.slice(0, -1)
-    return out
-  }
-  const normalized = normalizePath(pathname)
-  const isEmpresa = normalized === "/empresa"
+  // Detect Empresa robustly without relying on basePath env: strip locale only
+  const stripLocale = (p?: string) => (p ? p.replace(/^\/(es|en)(?=\/|$)/, "") : "")
+  const noLocale = stripLocale(pathname)
+  const isEmpresa = /(^|\/)empresa(\/)?$/.test(noLocale)
   const baseBtn =
     "px-4 py-2 rounded-full border text-sm transition-transform duration-150 hover:scale-[1.02]"
   const router = useRouter()
@@ -38,6 +26,12 @@ export default function YearSelector() {
     <div className="flex flex-wrap items-center gap-2">
       <Link
         href="/empresa"
+        onClick={() => {
+          // Optional: clear selected year to avoid stale state affecting header visuals
+          try {
+            setSelectedYear("")
+          } catch {}
+        }}
         className={clsx(
           baseBtn,
           isEmpresa

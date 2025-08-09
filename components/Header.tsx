@@ -11,6 +11,10 @@ export default function Header() {
   const [dark, setDark] = useState(false)
   const { selectedYear } = useStore()
   const pathname = usePathname()
+  // Detect Empresa robustly: strip locale only; basePath is handled by Next.js routing
+  const stripLocale = (p?: string) => (p ? p.replace(/^\/(es|en)(?=\/|$)/, "") : "")
+  const noLocale = stripLocale(pathname)
+  const onEmpresa = /(^|\/)empresa(\/)?$/.test(noLocale)
 
   useEffect(() => {
     setMounted(true)
@@ -56,10 +60,10 @@ export default function Header() {
       <div
         className="relative"
         style={{
-          backgroundImage: `url(${(process.env.NEXT_PUBLIC_BASE_PATH || "") + (pathname?.startsWith("/empresa") ? "/hero3.png" : selectedYear === "2024" ? "/hero1.webp" : selectedYear === "2025" ? "/hero2.webp" : "/hero.webp")})`,
+          backgroundImage: `url(${(process.env.NEXT_PUBLIC_BASE_PATH || "") + (onEmpresa ? "/hero3.png" : selectedYear === "2024" ? "/hero1.webp" : selectedYear === "2025" ? "/hero2.webp" : "/hero.webp")})`,
           backgroundSize: "cover",
           backgroundPosition:
-            pathname?.startsWith("/empresa")
+            onEmpresa
               ? "center"
               : selectedYear === "2024"
               ? "center 80%"
