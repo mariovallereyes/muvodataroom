@@ -7,15 +7,15 @@ import SalesTable from "@/components/SalesTable"
 import ProductCarousel from "@/components/ProductCarousel"
 import { useStore } from "@/lib/useStore"
 import { useEffect } from "react"
-import { useRouter, useSearchParams } from "next/navigation"
+import { useRouter } from "next/navigation"
 
 export default function Page() {
   const router = useRouter()
-  const searchParams = useSearchParams()
   useEffect(() => {
-    const hasYear = !!searchParams.get("year")
+    const hasYear = typeof window !== "undefined" &&
+      new URLSearchParams(window.location.search).has("year")
     if (!hasYear) router.replace("/empresa")
-  }, [router, searchParams])
+  }, [router])
   const {
     selectedYear,
     salesByYear,
