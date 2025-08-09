@@ -12,9 +12,9 @@ import { useRouter } from "next/navigation"
 export default function Page() {
   const router = useRouter()
   useEffect(() => {
-    const hasYear = typeof window !== "undefined" &&
-      new URLSearchParams(window.location.search).has("year")
-    if (!hasYear) router.replace("/empresa")
+    const hasYear = typeof window !== "undefined" && new URLSearchParams(window.location.search).has("year")
+    const base = (process.env.NEXT_PUBLIC_BASE_PATH as string) || ""
+    if (!hasYear) router.replace(`${base}/empresa`)
   }, [router])
   const {
     selectedYear,
