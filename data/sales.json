@@ -14,9 +14,9 @@
       { "month": "Diciembre", "revenue": 1289809, "units": 0 }
     ],
     "2023": [
-      { "month": "Enero", "revenue": 0, "units": 0 },
-      { "month": "Febrero", "revenue": 0, "units": 0 },
-      { "month": "Marzo", "revenue": 0, "units": 0 },
+      { "month": "Enero", "revenue": 806799, "units": 0 },
+      { "month": "Febrero", "revenue": 1099722, "units": 0 },
+      { "month": "Marzo", "revenue": 615611, "units": 0 },
       { "month": "Abril", "revenue": 1087484.75, "units": 0 },
       { "month": "Mayo", "revenue": 1684686.43, "units": 0 },
       { "month": "Junio", "revenue": 1213533.95, "units": 0 },
