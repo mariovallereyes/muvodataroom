@@ -18,7 +18,7 @@ export default function ProductCarousel() {
 
   // Load all images from /public/products dynamically so the user only drops files
   React.useEffect(() => {
-    fetch("/api/products")
+    fetch(((process.env.NEXT_PUBLIC_BASE_PATH as string) || "") + "/api/products")
       .then((r) => r.json())
       .then((d) => setFolderImages(d.images ?? []))
       .catch(() => setFolderImages([]))

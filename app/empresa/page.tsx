@@ -15,7 +15,7 @@ export default function EmpresaPage() {
   const [gallery, setGallery] = useState<GalleryItem[]>([])
 
   useEffect(() => {
-    fetch("/api/products")
+    fetch(((process.env.NEXT_PUBLIC_BASE_PATH as string) || "") + "/api/products")
       .then((r) => r.json())
       .then((d) => setGallery(d.images ?? []))
       .catch(() => setGallery([]))
