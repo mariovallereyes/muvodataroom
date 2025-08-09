@@ -11,10 +11,20 @@ import { useRouter } from "next/navigation"
 
 export default function Page() {
   const router = useRouter()
+  const { setSelectedYear } = useStore()
   useEffect(() => {
     const hasYear = typeof window !== "undefined" && new URLSearchParams(window.location.search).has("year")
     if (!hasYear) router.replace(`/empresa`)
   }, [router])
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const params = new URLSearchParams(window.location.search)
+    const y = params.get("year")
+    if (y && ["2023", "2024", "2025"].includes(y)) {
+      setSelectedYear(y)
+    }
+  }, [setSelectedYear])
   const {
     selectedYear,
     salesByYear,
