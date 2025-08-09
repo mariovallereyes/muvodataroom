@@ -1,7 +1,10 @@
 const sub = "/alteredventures/muvodataroom";
 /** @type {import('next').NextConfig} */
 module.exports = {
-  basePath: sub,
-  // Serve images as plain files so rewrites/proxy don't break _next/image
+  // Keep subpath in production; for local testing, set NEXT_PUBLIC_BASEPATH!=1
+  basePath: process.env.NEXT_PUBLIC_BASEPATH === "1" ? sub : "",
   images: { unoptimized: true },
+  env: {
+    NEXT_PUBLIC_BASE_PATH: process.env.NEXT_PUBLIC_BASEPATH === "1" ? sub : "",
+  },
 };
