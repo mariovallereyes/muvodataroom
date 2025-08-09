@@ -3,6 +3,7 @@
 import Image from "next/image"
 import { Pie, PieChart, Cell, ResponsiveContainer, Tooltip } from "recharts"
 import { useStore } from "@/lib/useStore"
+import top5Units from "@/data/top5_units.json"
 import * as React from "react"
 
 // Color palette (soft green + coral + teal + amber + purple)
@@ -41,20 +42,28 @@ export default function ProductCarousel() {
     return () => cancelAnimationFrame(raf)
   }, [])
 
-  const pieData = list
-    .map((p) => ({
-      name: p.name,
-      value: p.revenueByYear?.[selectedYear] ?? 0,
-    }))
-    .sort((a, b) => b.value - a.value)
-    .slice(0, 5)
+  // Prefer units override for 2025 if provided
+  const unitsOverride = (top5Units as Record<string, { name: string; units: number }[]>)?.[selectedYear]
+  const isUnitsMode = Array.isArray(unitsOverride) && selectedYear === "2025"
+  const pieData = isUnitsMode
+    ? unitsOverride.map((d) => ({ name: d.name, value: d.units }))
+    : list
+        .map((p) => ({
+          name: p.name,
+          value: p.revenueByYear?.[selectedYear] ?? 0,
+        }))
+        .sort((a, b) => b.value - a.value)
+        .slice(0, 5)
 
-  // Mock mensual (hasta tener granularidad real)
-  const pieMonthData = pieData
-    .map((d) => ({ ...d, value: Math.max(1, Math.round(d.value * (0.05 + Math.random() * 0.1))) }))
+  // Prefer monthly units override for 2025 if provided; otherwise derive a small fraction
+  const unitsOverrideMonth = (top5Units as Record<string, { name: string; units: number }[]>)?.[`${selectedYear}_month`]
+  const pieMonthData = isUnitsMode && Array.isArray(unitsOverrideMonth)
+    ? unitsOverrideMonth.map((d) => ({ name: d.name, value: d.units }))
+    : pieData.map((d) => ({ ...d, value: Math.max(1, Math.round(Number(d.value) * 0.08)) }))
 
   const money = (n: number) =>
     n.toLocaleString("es-MX", { style: "currency", currency: "MXN", maximumFractionDigits: 0 })
+  const unitsFmt = (n: number) => n.toLocaleString("es-MX")
 
   return (
     <div className="grid grid-rows-[auto_1fr] gap-6">
@@ -82,8 +91,12 @@ export default function ProductCarousel() {
                   contentStyle={{ background: "#111827", color: "#fff", border: "1px solid #374151", borderRadius: 8 }}
                   labelStyle={{ color: "#e5e7eb" }}
                   itemStyle={{ color: "#e5e7eb" }}
-                  formatter={(v: number) => [money(Number(v)), "Ingresos"]}
-                  labelFormatter={(l: any) => `Producto: ${String(l)}`}
+                  formatter={(v: number, _name: any, entry: any) =>
+                    isUnitsMode
+                      ? [unitsFmt(Number(v)), String(entry?.name ?? "")]
+                      : [money(Number(v)), "Ingresos"]
+                  }
+                  labelFormatter={(l: any) => (isUnitsMode ? "" : `Producto: ${String(l)}`)}
                 />
               </PieChart>
             </ResponsiveContainer>
@@ -111,8 +124,12 @@ export default function ProductCarousel() {
                   contentStyle={{ background: "#111827", color: "#fff", border: "1px solid #374151", borderRadius: 8 }}
                   labelStyle={{ color: "#e5e7eb" }}
                   itemStyle={{ color: "#e5e7eb" }}
-                  formatter={(v: number) => [money(Number(v)), "Ingresos"]}
-                  labelFormatter={(l: any) => `Producto: ${String(l)}`}
+                  formatter={(v: number, _name: any, entry: any) =>
+                    isUnitsMode
+                      ? [unitsFmt(Number(v)), String(entry?.name ?? "")]
+                      : [money(Number(v)), "Ingresos"]
+                  }
+                  labelFormatter={(l: any) => (isUnitsMode ? "" : `Producto: ${String(l)}`)}
                 />
               </PieChart>
             </ResponsiveContainer>
@@ -123,7 +140,7 @@ export default function ProductCarousel() {
       {/* Carrusel abajo (más ancho) */}
       <div
         ref={carouselRef}
-        className="flex gap-4 overflow-x-auto pb-2"
+        className="flex gap-4 overflow-x-auto pb-2 no-scrollbar"
         onMouseEnter={() => (speedRef.current = 0.15)}
         onMouseLeave={() => (speedRef.current = 1)}
       >

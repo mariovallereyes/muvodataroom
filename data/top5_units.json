@@ -1,0 +1,18 @@
+{
+  "2025": [
+    { "name": "Amplio Espectro", "units": 2394 },
+    { "name": "Pets", "units": 1267 },
+    { "name": "Aislados", "units": 962 },
+    { "name": "Pets 15ml", "units": 933 },
+    { "name": "Strong 15ml", "units": 719 }
+  ],
+  "2025_month": [
+    { "name": "Amplio Espectro", "units": 304 },
+    { "name": "Pets", "units": 189 },
+    { "name": "Aislados", "units": 161 },
+    { "name": "Pets 15ml", "units": 147 },
+    { "name": "Strong 15ml", "units": 109 }
+  ]
+}
+
+
