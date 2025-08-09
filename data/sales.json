@@ -1,4 +1,18 @@
 {
+    "2021": [
+      { "month": "Enero", "revenue": 495475, "units": 0 },
+      { "month": "Febrero", "revenue": 516529, "units": 0 },
+      { "month": "Marzo", "revenue": 552169, "units": 0 },
+      { "month": "Abril", "revenue": 512152, "units": 0 },
+      { "month": "Mayo", "revenue": 577199, "units": 0 },
+      { "month": "Junio", "revenue": 458670, "units": 0 },
+      { "month": "Julio", "revenue": 451693, "units": 0 },
+      { "month": "Agosto", "revenue": 418671, "units": 0 },
+      { "month": "Septiembre", "revenue": 547850, "units": 0 },
+      { "month": "Octubre", "revenue": 625684, "units": 0 },
+      { "month": "Noviembre", "revenue": 559809, "units": 0 },
+      { "month": "Diciembre", "revenue": 567425, "units": 0 }
+    ],
     "2022": [
       { "month": "Enero", "revenue": 395142, "units": 0 },
       { "month": "Febrero", "revenue": 503245, "units": 0 },

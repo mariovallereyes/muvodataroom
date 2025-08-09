@@ -62,6 +62,8 @@ export default function Header() {
         style={{
           backgroundImage: `url(${(process.env.NEXT_PUBLIC_BASE_PATH || "") + (onEmpresa
             ? "/hero3.png"
+            : selectedYear === "2021"
+            ? "/hero5.png"
             : selectedYear === "2022"
             ? "/hero4.webp"
             : selectedYear === "2024"
@@ -73,6 +75,8 @@ export default function Header() {
           backgroundPosition:
             onEmpresa
               ? "center"
+              : selectedYear === "2021"
+              ? "center 12%"
               : selectedYear === "2022"
               ? "center 53%"
               : selectedYear === "2024"
