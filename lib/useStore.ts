@@ -35,7 +35,7 @@ type Store = {
 }
 
 export const useStore = create<Store>((set) => ({
-  selectedYear: "2025",
+  selectedYear: "2024",
   salesByYear: salesRaw as SalesByYear,
   products: productsRaw as Products,
   company: companyRaw as Company,

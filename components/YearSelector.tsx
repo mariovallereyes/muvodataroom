@@ -16,7 +16,7 @@ export default function YearSelector() {
 
   const handleYearClick = (y: string) => {
     setSelectedYear(y)
-    if (pathname !== "/") router.push("/")
+    if (pathname !== "/") router.replace("/")
   }
 
   return (

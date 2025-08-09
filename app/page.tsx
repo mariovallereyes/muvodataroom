@@ -6,8 +6,14 @@ import SalesChart from "@/components/SalesChart"
 import SalesTable from "@/components/SalesTable"
 import ProductCarousel from "@/components/ProductCarousel"
 import { useStore } from "@/lib/useStore"
+import { useEffect } from "react"
+import { useRouter } from "next/navigation"
 
 export default function Page() {
+  const router = useRouter()
+  useEffect(() => {
+    router.replace("/empresa")
+  }, [router])
   const {
     selectedYear,
     salesByYear,
