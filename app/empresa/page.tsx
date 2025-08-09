@@ -41,7 +41,9 @@ export default function EmpresaPage() {
     for (const ext of exts) {
       const candidate = `${base}.${ext}`
       try {
-        const res = await fetch(candidate, { method: "HEAD" })
+        const res = await fetch(((process.env.NEXT_PUBLIC_BASE_PATH as string) || "") + candidate, {
+          method: "HEAD",
+        })
         if (res.ok) return candidate
       } catch {}
     }
@@ -62,7 +64,12 @@ export default function EmpresaPage() {
     return (
       <div className={"relative overflow-hidden rounded-lg bg-gradient-to-br from-accent/40 to-primary/30 " + className}>
         {resolved ? (
-          <Image src={(process.env.NEXT_PUBLIC_BASE_PATH || "") + resolved} alt={alt} fill className="object-cover" />
+          <Image
+            src={((process.env.NEXT_PUBLIC_BASE_PATH as string) || "") + resolved}
+            alt={alt}
+            fill
+            className="object-cover"
+          />
         ) : null}
       </div>
     )
@@ -85,7 +92,7 @@ export default function EmpresaPage() {
       <div className={(large ? "col-span-2 row-span-2 " : "") + "relative rounded-xl overflow-hidden bg-neutral-100 dark:bg-neutral-800"}>
         {resolved ? (
           <Image
-            src={(process.env.NEXT_PUBLIC_BASE_PATH || "") + resolved}
+            src={((process.env.NEXT_PUBLIC_BASE_PATH as string) || "") + resolved}
             alt="galería"
             fill
             className="object-cover"
@@ -109,7 +116,12 @@ export default function EmpresaPage() {
     return (
       <div className="relative h-14 w-14 rounded-full overflow-hidden bg-gradient-to-br from-accent to-primary/70 flex items-center justify-center text-white font-semibold">
         {resolved ? (
-          <Image src={resolved} alt={alt} fill className="object-cover" />
+          <Image
+            src={((process.env.NEXT_PUBLIC_BASE_PATH as string) || "") + resolved}
+            alt={alt}
+            fill
+            className="object-cover"
+          />
         ) : (
           <span>{initials}</span>
         )}
