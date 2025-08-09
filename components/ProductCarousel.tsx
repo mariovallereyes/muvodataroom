@@ -45,7 +45,7 @@ export default function ProductCarousel() {
   // Prefer units override for 2025 if provided
   const unitsOverride = (top5Units as Record<string, { name: string; units: number }[]>)?.[selectedYear]
   const isUnitsMode = Array.isArray(unitsOverride) && selectedYear === "2025"
-  const pieData = isUnitsMode
+  const pieDataRaw = isUnitsMode
     ? unitsOverride.map((d) => ({ name: d.name, value: d.units }))
     : list
         .map((p) => ({
@@ -55,11 +55,22 @@ export default function ProductCarousel() {
         .sort((a, b) => b.value - a.value)
         .slice(0, 5)
 
+  const sumRaw = pieDataRaw.reduce((acc, it) => acc + Number(it.value || 0), 0)
+  const pieData = sumRaw > 0
+    ? pieDataRaw
+    : [
+        { name: "Pendiente 1", value: 5 },
+        { name: "Pendiente 2", value: 4 },
+        { name: "Pendiente 3", value: 3 },
+        { name: "Pendiente 4", value: 2 },
+        { name: "Pendiente 5", value: 1 },
+      ]
+
   // Prefer monthly units override for 2025 if provided; otherwise derive a small fraction
   const unitsOverrideMonth = (top5Units as Record<string, { name: string; units: number }[]>)?.[`${selectedYear}_month`]
   const pieMonthData = isUnitsMode && Array.isArray(unitsOverrideMonth)
     ? unitsOverrideMonth.map((d) => ({ name: d.name, value: d.units }))
-    : pieData.map((d) => ({ ...d, value: Math.max(1, Math.round(Number(d.value) * 0.08)) }))
+    : pieDataRaw.map((d) => ({ ...d, value: Math.max(1, Math.round(Number(d.value) * 0.08)) }))
 
   const money = (n: number) =>
     n.toLocaleString("es-MX", { style: "currency", currency: "MXN", maximumFractionDigits: 0 })

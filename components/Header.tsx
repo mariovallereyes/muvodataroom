@@ -60,11 +60,21 @@ export default function Header() {
       <div
         className="relative"
         style={{
-          backgroundImage: `url(${(process.env.NEXT_PUBLIC_BASE_PATH || "") + (onEmpresa ? "/hero3.png" : selectedYear === "2024" ? "/hero1.webp" : selectedYear === "2025" ? "/hero2.webp" : "/hero.webp")})`,
+          backgroundImage: `url(${(process.env.NEXT_PUBLIC_BASE_PATH || "") + (onEmpresa
+            ? "/hero3.png"
+            : selectedYear === "2022"
+            ? "/hero4.webp"
+            : selectedYear === "2024"
+            ? "/hero1.webp"
+            : selectedYear === "2025"
+            ? "/hero2.webp"
+            : "/hero.webp")})`,
           backgroundSize: "cover",
           backgroundPosition:
             onEmpresa
               ? "center"
+              : selectedYear === "2022"
+              ? "center 53%"
               : selectedYear === "2024"
               ? "center 80%"
               : selectedYear === "2025"

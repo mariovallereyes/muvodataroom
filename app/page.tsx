@@ -21,7 +21,7 @@ export default function Page() {
     if (typeof window === "undefined") return
     const params = new URLSearchParams(window.location.search)
     const y = params.get("year")
-    if (y && ["2023", "2024", "2025"].includes(y)) {
+    if (y && ["2022", "2023", "2024", "2025"].includes(y)) {
       setSelectedYear(y)
     }
   }, [setSelectedYear])
