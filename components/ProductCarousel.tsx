@@ -133,7 +133,7 @@ export default function ProductCarousel() {
               <div className="pointer-events-none absolute inset-0 bg-[rgba(165,214,167,0.22)] opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
               <div className="relative w-full aspect-square bg-neutral-100 dark:bg-neutral-800 transform transition-transform duration-200 group-hover:scale-110">
                 <Image
-                  src={(p.src as string) ?? (p.image as string)}
+                  src={(process.env.NEXT_PUBLIC_BASE_PATH || "") + (((p.src as string) ?? (p.image as string)) as string)}
                   alt={(p.name as string) ?? "Producto"}
                   fill
                   className="object-contain"

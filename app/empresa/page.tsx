@@ -61,7 +61,9 @@ export default function EmpresaPage() {
     }, [src, srcBase])
     return (
       <div className={"relative overflow-hidden rounded-lg bg-gradient-to-br from-accent/40 to-primary/30 " + className}>
-        {resolved ? <Image src={resolved} alt={alt} fill className="object-cover" /> : null}
+        {resolved ? (
+          <Image src={(process.env.NEXT_PUBLIC_BASE_PATH || "") + resolved} alt={alt} fill className="object-cover" />
+        ) : null}
       </div>
     )
   }
@@ -83,7 +85,7 @@ export default function EmpresaPage() {
       <div className={(large ? "col-span-2 row-span-2 " : "") + "relative rounded-xl overflow-hidden bg-neutral-100 dark:bg-neutral-800"}>
         {resolved ? (
           <Image
-            src={resolved}
+            src={(process.env.NEXT_PUBLIC_BASE_PATH || "") + resolved}
             alt="galería"
             fill
             className="object-cover"
